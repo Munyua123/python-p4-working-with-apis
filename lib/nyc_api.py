@@ -8,15 +8,12 @@ class GetPrograms:
     URL = "http://data.cityofnewyork.us/resource/uvks-tn5n.json"
 
     response = requests.get(URL)
-    return response.json()
+    return response.content
   
   def program_school(self):
     # we use the JSON library to parse the API response into nicely formatted JSON
     programs_list = []
-    programs = self.get_programs()
-
-    print(programs)
-
+    programs = json.loads(self.get_programs())
     for program in programs:
       programs_list.append(program["agency"])
     return programs_list
